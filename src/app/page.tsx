@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { IconBadge } from "@/components/icons";
+import { Photo } from "@/components/photo";
+import { PlanGlimpse } from "@/components/plan-glimpse";
 import { RouteDiagram } from "@/components/route-diagram";
 import { site } from "@/content/site";
 
@@ -66,6 +69,23 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b border-line bg-[#e7ebf0]">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-copper">
+            {site.barakat.glimpseHeading}
+          </p>
+          <h2 className="mt-3 max-w-3xl font-serif text-4xl font-semibold uppercase tracking-wide">
+            Barakat planning screen
+          </h2>
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+            {site.barakat.glimpseLede}
+          </p>
+          <div className="mt-8">
+            <PlanGlimpse />
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-line">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <h2 className="max-w-3xl font-serif text-3xl font-semibold uppercase leading-snug tracking-wide md:text-4xl">
@@ -77,10 +97,13 @@ export default function Home() {
                 key={pillar.index}
                 className="grid gap-4 border-t border-line py-8 md:grid-cols-12 md:gap-6"
               >
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-copper md:col-span-3">
-                  {pillar.index}
-                  <span className="mt-2 block text-muted">{pillar.kicker}</span>
-                </p>
+                <div className="md:col-span-3">
+                  <IconBadge name={pillar.icon} />
+                  <p className="mt-4 font-mono text-xs uppercase tracking-[0.16em] text-copper">
+                    {pillar.index}
+                    <span className="mt-2 block text-muted">{pillar.kicker}</span>
+                  </p>
+                </div>
                 <h3 className="font-serif text-3xl font-semibold uppercase tracking-wide md:col-span-4">
                   {pillar.title}
                 </h3>
@@ -93,18 +116,46 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <h2 className="font-serif text-4xl font-semibold uppercase tracking-wide">
+            {site.home.methodHeading}
+          </h2>
+          <ol className="mt-10 grid gap-8 md:grid-cols-3">
+            {site.home.method.map((step) => (
+              <li key={step.index} className="border-t border-line pt-6">
+                <IconBadge name={step.icon} />
+                <p className="mt-5 font-mono text-xs uppercase tracking-[0.16em] text-copper">
+                  {step.index}
+                </p>
+                <h3 className="mt-3 font-serif text-2xl font-semibold uppercase tracking-wide">
+                  {step.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="bg-ink-deep text-paper">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
-          <div className="md:col-span-4">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-12 md:px-8 md:py-20">
+          <div className="md:col-span-5">
+            <Photo
+              src={site.images.facility.src}
+              alt={site.images.facility.alt}
+              caption={site.images.facility.caption}
+              captionTone="dark"
+            />
+          </div>
+          <div className="md:col-span-7">
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-copper">
               {site.home.caseStudy.eyebrow}
             </p>
             <p className="mt-4 font-mono text-xs uppercase tracking-[0.16em] text-paper/70">
               {site.home.caseStudy.place}
             </p>
-          </div>
-          <div className="md:col-span-8">
-            <h2 className="font-serif text-5xl font-semibold uppercase tracking-wide">
+            <h2 className="mt-6 font-serif text-5xl font-semibold uppercase tracking-wide">
               {site.home.caseStudy.title}
             </h2>
             <p className="mt-3 text-lg text-paper/80">
@@ -134,18 +185,30 @@ export default function Home() {
           <ol className="border-t border-line md:col-span-7">
             {site.home.markets.map((market, index) => (
               <li
-                key={market}
-                className="flex items-baseline gap-6 border-b border-line py-4"
+                key={market.label}
+                className="flex items-center gap-5 border-b border-line py-4"
               >
                 <span className="font-mono text-xs text-copper">
                   {String(index + 1).padStart(2, "0")}
                 </span>
+                <IconBadge name={market.icon} />
                 <span className="font-serif text-2xl font-medium uppercase tracking-wide">
-                  {market}
+                  {market.label}
                 </span>
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="border-b border-line">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8">
+          <Photo
+            src={site.images.city.src}
+            alt={site.images.city.alt}
+            caption={site.images.city.caption}
+            aspect="aspect-[16/7]"
+          />
         </div>
       </section>
 

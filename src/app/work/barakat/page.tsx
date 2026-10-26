@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { IconBadge } from "@/components/icons";
 import { PageIntro } from "@/components/page-intro";
+import { Photo } from "@/components/photo";
+import { PlanGlimpse } from "@/components/plan-glimpse";
 import { RouteDiagram } from "@/components/route-diagram";
 import { site } from "@/content/site";
 
@@ -20,6 +23,21 @@ export default function BarakatPage() {
         subtitle={study.titleLine}
         lede={study.lede}
       />
+
+      <section className="border-b border-line bg-[#e7ebf0]">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-20">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-copper">
+            {study.glimpseHeading}
+          </p>
+          <h2 className="mt-3 font-serif text-4xl font-semibold uppercase tracking-wide">
+            Planning screen
+          </h2>
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">{study.glimpseLede}</p>
+          <div className="mt-8">
+            <PlanGlimpse />
+          </div>
+        </div>
+      </section>
 
       <section className="border-b border-line">
         <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 py-16 md:grid-cols-12 md:px-8 md:py-24">
@@ -44,13 +62,25 @@ export default function BarakatPage() {
 
       <section className="border-b border-line">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-24">
-          <h2 className="font-serif text-3xl font-semibold uppercase tracking-wide">
-            {study.solutionHeading}
-          </h2>
-          <div className="mt-6 max-w-3xl space-y-4 leading-relaxed text-muted">
-            {study.solution.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+          <div className="grid items-start gap-10 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <Photo
+                src={site.images.planning.src}
+                alt={site.images.planning.alt}
+                caption={site.images.planning.caption}
+                aspect="aspect-[4/3]"
+              />
+            </div>
+            <div className="md:col-span-7">
+              <h2 className="font-serif text-3xl font-semibold uppercase tracking-wide">
+                {study.solutionHeading}
+              </h2>
+              <div className="mt-6 space-y-4 leading-relaxed text-muted">
+                {study.solution.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           </div>
           <ol className="mt-12 border-t border-line">
             {study.supports.map((item, index) => (
@@ -58,9 +88,12 @@ export default function BarakatPage() {
                 key={item.title}
                 className="grid gap-3 border-b border-line py-6 md:grid-cols-12 md:gap-6"
               >
-                <p className="font-mono text-xs text-copper md:col-span-2">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
+                <div className="flex items-center gap-4 md:col-span-2">
+                  <IconBadge name={item.icon} />
+                  <p className="font-mono text-xs text-copper">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                </div>
                 <h3 className="font-serif text-2xl font-semibold uppercase tracking-wide md:col-span-4">
                   {item.title}
                 </h3>

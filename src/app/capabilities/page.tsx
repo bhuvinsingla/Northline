@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { IconBadge } from "@/components/icons";
 import { PageIntro } from "@/components/page-intro";
 import { site } from "@/content/site";
 
@@ -22,7 +23,8 @@ export default function CapabilitiesPage() {
               key={item.title}
               className="border-b border-line px-5 py-10 md:px-8 md:py-14 md:odd:pr-12 md:even:border-l md:even:pl-12"
             >
-              <p className="font-mono text-xs uppercase tracking-[0.16em] text-copper">
+              <IconBadge name={item.icon} />
+              <p className="mt-5 font-mono text-xs uppercase tracking-[0.16em] text-copper">
                 {String(index + 1).padStart(2, "0")} · {item.status}
               </p>
               <h2 className="mt-4 font-serif text-3xl font-semibold uppercase tracking-wide">
@@ -44,12 +46,15 @@ export default function CapabilitiesPage() {
                 key={line.index}
                 className="grid gap-4 border-b border-line py-8 md:grid-cols-12 md:gap-6"
               >
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-copper md:col-span-3">
-                  {line.index}
-                  <span className="mt-2 block normal-case tracking-normal text-muted">
-                    {line.kicker}
-                  </span>
-                </p>
+                <div className="md:col-span-3">
+                  <IconBadge name={line.icon} />
+                  <p className="mt-4 font-mono text-xs uppercase tracking-[0.16em] text-copper">
+                    {line.index}
+                    <span className="mt-2 block normal-case tracking-normal text-muted">
+                      {line.kicker}
+                    </span>
+                  </p>
+                </div>
                 <h3 className="font-serif text-3xl font-semibold uppercase tracking-wide md:col-span-4">
                   {line.title}
                 </h3>

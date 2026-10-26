@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { PageIntro } from "@/components/page-intro";
+import { Photo } from "@/components/photo";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -28,6 +29,14 @@ export default function ContactPage() {
             >
               {site.contactEmail}
             </a>
+            <div className="mt-10">
+              <Photo
+                src={site.images.city.src}
+                alt={site.images.city.alt}
+                caption={site.images.city.caption}
+                aspect="aspect-[16/10]"
+              />
+            </div>
           </div>
           <div className="md:col-span-6 md:col-start-7">
             <ContactForm />
